@@ -4,19 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel="stylesheet" href="../static/css/main.css">
+  <link rel="stylesheet" href="../static/css/transitions.css">
   <title>Recipes</title>
 </head>
 <body class="offline">
   <!-- Main Menu -->
   <nav id="main-menu">
-    <ul>
-      <li id="home">Home</li>
-      <li id="contact">Contact</li>
-      <li id="register">Register</li>
-      <li id="log-in">Log in</li>
-      <li id="account">Account</li>
-    </ul>
+      <ul>
+        <li class="menu-item home">Home</li>
+        <li class="menu-item contact">Contact</li>
+        <li class="menu-item account">Account</li>
+      </ul>
   </nav>
 
   <!-- Header with log in and register button -->
@@ -24,10 +25,10 @@
     <h1>Some title</h1>
     <div>
       <a href="#">
-        <button id="log-in-btn">Log in</button>
+        <button class="pop">Log in</button>
       </a>
       <a href="#">
-        <button id="register-btn">Register</button>
+        <button class="pop">Register</button>
       </a>
     </div>
   </header>
@@ -35,31 +36,43 @@
   <!-- Search bar with filter -->
   <section id="search-options">
     <form action="" method="">
-      <input id="search-field" type="search" name="search">
-      <button type="submit">Search</button>
+      <div id="search-container">
+        <button type="button" id="filter-btn">Filter</button>
+        <input type="search" name="search">
+        <button type="button">Search</button>
+      </div>
       <!-- Filter hidden -->
-      <div id="filter-container">
-      <fieldset id="standard-filter" class="hidden">
-        <label>Prepartion time
-          <input id="hours" class="prep-time" type="number" name="hours">
-          <input id="mins" class="prep-time" type="number" name="minutes">
-        </label>
-        <label>Expenses
+      <div id="filter-container" class="">
+        <div class="filter-section">
+          <label for="prep">Prepartion time</label>
+            <select name="prep_time" id="prep">
+              <option value="short">No time</option>
+              <option value="medium">I have some time</option>
+              <option value="long">I have all day</option>
+            </select>
+        </div>
+        <div class="filter-section">
+        <label for="expenses">Expenses</label>
           <select name="expenses" id="expenses">
             <option value="low">Low</option>
             <option value="medium">Medium</option>
             <option value="high">High</option>
           </select>
-        </label>
-      </fieldset>
-      <fieldset>
-        <input type="text">
-        <input type="text">
-        <input type="text">
-        <button type="submit">Search</button>
-      </fieldset>
+      </div>
     </div>
     </form>
+
+    <form action="">
+      <div id="refrigerator-contents">
+        <label>What's in your refrigerator?
+          <input type="text">
+          <input type="text">
+          <input type="text">
+        </label>
+        <button type="submit">Search</button>
+      </div>
+    </form>
+
   </section>
 
   <main>
@@ -146,5 +159,7 @@
   <section class="pagination">
     <a href="">1</a>
   </section>
+
+  <script src="../static/js/transitions.js"></script>
 </body>
 </html>
