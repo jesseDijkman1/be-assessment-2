@@ -1,0 +1,43 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+html {
+  font-size: 16px;
+}
+
+li {
+  list-style-type: none;
+}
+
+button {
+  background: none;
+}
+
+#main-menu {}
+#main-menu ul {}
+#main-menu ul li {}
+
+#main-header {}
+#main-header h1 {}
+#main-header div {}
+#main-header div a {}
+#main-header div a button {}
+
+#log-in-btn {}
+#register-btn {}
+
+#search-options {}
+#search-options form {}
+
+#search-field {}
+
+#filter {}
+#filter label {}
+#filter #hours {}
+#filter #mins {}
+
+#search-options button {}
