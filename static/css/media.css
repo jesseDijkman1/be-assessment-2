@@ -1,0 +1,18 @@
+@media screen and (min-width: 1000px) {
+  #main-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 4rem;
+    padding: 0 .5rem;
+  }
+  .recipe {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+@media screen and (min-width: 450px) {
+  .recipe {
+    padding: 1.5rem 2rem 1rem 2rem;
+  }
+}
