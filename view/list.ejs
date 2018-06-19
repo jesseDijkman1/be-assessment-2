@@ -1,0 +1,152 @@
+<% include includes/head.ejs %>
+<body>
+<!-- Main Menu -->
+<% include includes/menu.ejs %>
+
+<!-- Header with log in and register button -->
+<div id="main-img">
+  <header id="main-header">
+    <h1>Some title</h1>
+    <div>
+      <a href="/login">
+      <button class="pop">Log in</button>
+    </a>
+      <a href="/register">
+      <button class="pop">Register</button>
+    </a>
+    </div>
+  </header>
+
+  <!-- Search bar with filter -->
+
+
+
+  <form action="">
+    <div id="refrigerator-contents">
+      <h2>What's in your refrigerator?</h2>
+      <input type="text">
+      <input type="text">
+      <input type="text">
+      <input type="text">
+      <input type="text">
+      <input type="text">
+      <button type="submit">Search</button>
+    </div>
+  </form>
+</div>
+
+<form id="search-bar" action="" method="">
+  <div id="search-container">
+    <input type="search" name="search" placeholder="Search recipes">
+    <button type="button">Search</button>
+  </div>
+</form>
+
+<main id="recipe-list">
+
+  <h1>Recipes</h1>
+
+  <button id="sort-btn" class="pop">Sort</button>
+  <!-- Sorting options -->
+  <form id="sorting" class="hidden" action="" method="">
+    <!-- S-I-C = Sorting Item Container -->
+    <!-- S-I-T = Sorting Item Title -->
+    <div class="s-i-c">
+      <p class="s-i-t">Popularity</p>
+      <div>
+        <label>
+          Most first
+          <input type="radio" name="popularity" value="plus">
+        </label>
+        <label>
+          Least first
+          <input type="radio" name="popularity" value="min">
+        </label>
+      </div>
+    </div>
+
+    <div class="s-i-c">
+      <p class="s-i-t">Expenses</p>
+      <div>
+        <label>
+          Most first
+          <input type="radio" name="expenses" value="plus">
+        </label>
+        <label>
+          Least first
+          <input type="radio" name="expenses" value="min">
+        </label>
+      </div>
+    </div>
+
+    <div class="s-i-c">
+      <p class="s-i-t">Preperation time</p>
+      <div>
+        <label>
+          Longest first
+          <input type="radio" name="preperation" value="plus">
+        </label>
+        <label>
+          Shortest first
+          <input type="radio" name="preperation" value="min">
+        </label>
+      </div>
+    </div>
+    <button class="pop" type="submit">Sort Recipes</button>
+  </form>
+
+  <!-- Recipes -->
+  <div id="main-grid">
+    <article class="recipe">
+      <a class="detailUrl" href=""></a>
+      <img src="https://source.unsplash.com/random" alt="">
+      <h1>Title</h1>
+      <small class="author">Some guy</small>
+      <footer>
+        <ul>
+          <li>
+            <span class="fa fa-heart"></span>
+            <p class="likes">Some nr</p>
+          </li>
+          <li>
+            <span class="fa fa-dollar"></span>
+            <p class="likes">Medium</p>
+          </li>
+          <li>
+            <span class="fa fa-clock-o"></span>
+            <p class="likes">Medium</p>
+          </li>
+          <li>
+            <form class="like-recipe" action="" method="">
+              <button class="pop" type="button" name="like" value="recipe_id">&#9829;</button>
+            </form>
+          </li>
+        </ul>
+      </footer>
+    </article>
+
+    <article class="recipe">
+      <h1>Title</h1>
+      <small class="author">Some guy</small>
+      <footer>
+        <ul>
+          <li>
+            <span class="fa fa-clock-o"></span>
+            <p class="likes">Some nr</p>
+          </li>
+          <li>
+            <form class="like-recipe" action="" method="">
+              <button class="pop" type="button" name="like" value="recipe_id">&#9829;</button>
+            </form>
+          </li>
+        </ul>
+      </footer>
+    </article>
+  </div>
+</main>
+<!-- Pagination (1 2 3 4 5 6 etc) -->
+<section class="pagination">
+  <a href="">1</a>
+</section>
+
+<% include includes/footer.ejs %>

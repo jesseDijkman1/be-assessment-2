@@ -20,6 +20,9 @@ button {
   background: none;
   outline: none;
 }
+input, button {
+  font-size: 1.25rem;
+}
 
 button:hover,
 #main-menu ul li:hover {
@@ -28,6 +31,9 @@ button:hover,
 h1 {
   font-family: 'Lora', Arial, Avenir;
 }
+
+/* List.ejs styling */
+
 /* =================== */
 /* Main Navigation Bar */
 /* =================== */
@@ -42,10 +48,11 @@ h1 {
 }
 
 #main-menu ul {
-  width: 75%;
-  max-width: 20rem;
+  width: 90%;
+  max-width: 30rem;
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
 }
 
 #main-menu ul li {
@@ -56,13 +63,16 @@ h1 {
 #main-menu ul li:hover {
   color: #FFF;
 }
-
+#main-menu ul a:last-of-type li {
+  font-size: 1.8rem;
+}
 /* =========== */
 /* Main Header */
 /* =========== */
 #main-img {
-  background-image: url("https://source.unsplash.com/random");
+  background-image: url('/img/main.jpg');
   background-size: cover;
+  background-position: bottom;
   padding-bottom: 1.5rem;
   padding-left: .5rem;
   padding-right: .5rem;

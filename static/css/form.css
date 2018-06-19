@@ -1,0 +1,66 @@
+.user-form-body {
+  background-image: url('https://source.unsplash.com/random');
+  background-size: cover;
+}
+
+.user-form-body > form {
+  display: block;
+  margin: 3rem .5rem;
+}
+
+.user-form {
+  color: #FFF;
+  background-color: rgba(0,0,0,.7);
+  max-width: 34rem;
+  display: flex;
+  flex-direction: column;
+  padding: .5rem;
+  margin: 0 auto;
+}
+
+.user-form h1 {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: solid .1rem rgba(255,255,255,.5);
+  text-align: center;
+}
+
+.user-form label {
+  font-size: 1.25rem;
+  margin-bottom: .5rem;
+  padding-left: .5rem;
+}
+
+.user-form input {
+  margin-bottom: 1.5rem;
+}
+.user-form input:last-of-type {
+  margin-bottom: 0;
+}
+.user-form input {
+  height: 2.5rem;
+  color: rgba(255,255,255,.8);
+  background-color: rgba(255,255,255,.3);
+  padding: .5rem;
+  outline: none;
+  border-bottom: solid .1rem #FF7839;
+}
+
+.user-form button {
+  background-color: #00A6FD;
+  margin: 2rem 0 1rem 0;
+  height: 2.5rem;
+  border-radius: 3px;
+  color: rgba(0,0,0,.7);
+}
+
+.user-form button:hover {
+  color: #FFF;
+}
+
+.user-form > a {
+  color: #FF7839;
+  text-align: center;
+  margin-bottom: 1rem;
+  text-decoration: underline;
+}
