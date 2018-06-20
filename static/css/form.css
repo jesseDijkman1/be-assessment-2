@@ -40,10 +40,10 @@
 .user-form input {
   height: 2.5rem;
   color: rgba(255,255,255,.8);
-  background-color: rgba(255,255,255,.3);
+  background-color: rgba(0,0,0,.5);
   padding: .5rem;
   outline: none;
-  border-bottom: solid .1rem #FF7839;
+  border-bottom: solid .1rem #00A6FD;
 }
 
 .user-form button {
@@ -63,4 +63,19 @@
   text-align: center;
   margin-bottom: 1rem;
   text-decoration: underline;
+}
+
+.isEmpty {
+  border: solid .1rem red !important;
+}
+
+.isInvalid {
+  border: solid .1rem yellow !important;
+}
+
+.isInvalid::placeholder {
+  font-family: "Avenir Next";
+  font-weight: lighter;
+  font-size: 1rem;
+  color: yellow;
 }
