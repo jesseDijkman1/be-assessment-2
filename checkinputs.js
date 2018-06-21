@@ -77,16 +77,12 @@ module.exports = function(inputData) {
               break;
           }
         });
-
-
       } else if (inputData.user_password !== inputData.user_passwordConf) {
         result.error.user_password = 'isInvalid';
         result.error.user_passwordConf = 'isInvalid';
         result.msg.user_password = `Passwords don't match`;
       }
     }
-
   });
-
   return result;
 };

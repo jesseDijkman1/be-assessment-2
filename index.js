@@ -2,15 +2,18 @@
 /* jshint node: true */
 
 'use strict';
+const checker = require('./checkinputs.js');
 
 const ejs = require('ejs');
 const bodyParser = require('body-parser');
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const mysql = require('mysql');
-// const salt = bcrypt.genSaltSync(10);
+const emailValidator = require('email-validator');
+const session = require('express-session');
 
-const checker = require('./checkinputs.js');
+// const passport = require('passport');
+// const LocalStrategy = require('passport-local').Strategy;
 
 require('dotenv').config();
 
@@ -30,16 +33,24 @@ const app = express();
 
 app.set('view engine', 'ejs');
 app.set('views', 'view');
+// app.use(passport.initialize());
 app.use(express.static('static'));
 app.use('/img', express.static('images'));
 app.use(bodyParser.urlencoded({
   extended: false
 }));
 
+app.use(session({
+  secret: 'work hard',
+  resave: true,
+  saveUninitialized: false
+}));
+
 // Routes
 
 app.get('/', (req, res) => {
-  res.render('list.ejs');
+  console.log(req);
+  res.render('list.ejs', {req:req});
 });
 
 app.get('/register', (req, res) => {
@@ -66,13 +77,18 @@ app.get('/register', (req, res) => {
       user_passwordConf: null
     }
   };
-
-  res.render('register.ejs', result);
+  console.log(req);
+  res.render('register.ejs', Object.assign({}, result, {req: req}));
 });
 
 app.get('/login', (req, res) => {
-  console.log('yes');
-  res.render('login.ejs');
+  let error = {
+    error: null,
+    msg: null,
+    value: null
+  };
+  console.log(req);
+  res.render('login.ejs', Object.assign({}, error, {req: req}));
 });
 
 // Let User Make An Account
@@ -82,7 +98,7 @@ app.post('/register', (req, res, next) => {
 
   if (Object.keys(result.error).length > 0) {
 
-    return res.render('register.ejs', result);
+    return res.render('register.ejs', Object.assign({}, result, {req: req}));
 
   } else {
     connection.query(`SELECT id FROM users WHERE users.email = '${req.body.user_email}'`, (err, emails) => {
@@ -92,7 +108,7 @@ app.post('/register', (req, res, next) => {
         result.data.user_email = null;
         result.msg.user_email = 'Already in use';
 
-        return res.render('register.ejs', result)
+        return res.render('register.ejs', Object.assign({}, result, {req: req}))
       } else {
 
         let x = req.body.user_password;
@@ -122,22 +138,47 @@ app.post('/register', (req, res, next) => {
                 }
             });
         });
-
-
-
       }
-
-    })
+    });
   }
-
-
 });
 
 // Let User Log In
-app.post('/login', (req, res) => {
-  console.log(req.body);
-});
+app.post('/login', (req, res, next) => {
+  let error = {
+    error: 'isInvalid',
+    msg: 'Wrong email or password',
+    value: null
+  };
 
+  if (emailValidator.validate(req.body.user_email) == false) {
+    return res.render('login.ejs', Object.assign({}, error, {req: req}));
+  }
+
+  connection.query(`SELECT * FROM users WHERE users.email = '${req.body.user_email}'`, (err, user) => {
+    if (err) {
+      return console.log(err);
+    }
+    if (!user[0]) {
+      error.msg = `User doesn't exist`;
+      return res.render('login.ejs', Object.assign({}, error, {req: req}));
+    }
+    else {
+    bcrypt.compare(req.body.user_password, user[0].password, function(err, pass) {
+      if (err) {
+        return next(err);
+      } else if (pass == false) {
+        error.msg = 'Wrong password';
+        return res.render('login.ejs', Object.assign({}, error, {req: req}));
+      } else {
+        // Email and password are correct
+        req.session.userId = user[0].id;
+        res.redirect('/');
+      }
+    });
+  }
+  });
+});
 
 app.listen(3000, () => {
   console.log('Listening to port 3000');
