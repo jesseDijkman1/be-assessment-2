@@ -334,7 +334,8 @@ h1 {
   font-size: 1.25rem;
   color: #FFF;
 }
-#main-grid {
+
+.main-grid {
   /* display: grid;
   grid-template-columns: 1fr;
   align-items: center; */

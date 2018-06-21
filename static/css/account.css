@@ -51,14 +51,7 @@
 
 #acc-container section {
   transition: transform .15s ease-in-out;
-}
-
-#acc-container section:first-of-type {
-  /* background-color:; */
-}
-
-#acc-container section:last-of-type {
-  background-color: #ccc;
+  overflow-y: scroll;
 }
 
 body.sec-1 #acc-container section:first-of-type,
@@ -76,7 +69,9 @@ body.sec-2 #account-menu ul li:last-of-type {
   color: #FFF;
 }
 
+/* ================== */
 /* My Account Section */
+/* ================== */
 #acc-container section:first-of-type header {
   padding: 1rem 3rem;
   /* margin: 0 3rem; */
@@ -93,11 +88,44 @@ body.sec-2 #account-menu ul li:last-of-type {
   margin: 0 auto;
   overflow: hidden;
   background-color: #ccc;
+  position: relative;
 }
 
 #acc-container section:first-of-type header > div img {
   width: auto;
   height: 100%;
+}
+#acc-container section:first-of-type header > div input {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 3rem;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  opacity: 0;
+  border-radius: 100%;
+  font-size: 0;
+}
+#acc-container section:first-of-type header > div input:hover {
+  cursor: pointer;
+}
+#acc-container section:first-of-type header > div span {
+  transition: opacity .3s ease;
+  opacity: .5;
+  display: block;
+  position: absolute;
+  font-size: 4rem;
+  z-index: 2;
+  text-align: center;
+  width: 100%;
+  bottom: 2rem;
+  color: #FFF;
+
+}
+
+#acc-container section:first-of-type header > div:hover span {
+  opacity: 1;
 }
 
 #acc-container section:first-of-type header h3 {
@@ -117,13 +145,14 @@ body.sec-2 #account-menu ul li:last-of-type {
 #acc-container section:first-of-type > section > div:first-of-type {
   position: relative;
   margin-bottom: 1.5rem;
+  padding-top: 1.5rem;
 }
 
 #acc-container section:first-of-type > section > div:first-of-type h1 {
   color: #FF7839;
   flex-grow: 1;
   text-align: center;
-  font-size: 3rem;
+  font-size: 1.75rem;
 }
 
 #acc-container section:first-of-type > section > div:first-of-type span {
@@ -191,8 +220,17 @@ body.sec-2 #account-menu ul li:last-of-type {
   background-color: rgba(255,255,255,.5);
 }
 
+#my-info button {
+  grid-column: 1/3;
+  background-color: #ff3849;
+  padding: .75rem 1rem;
+  border-radius: 3px;
+  color: #FFF;
+}
+
 #my-info button:disabled {
   display: none;
+
 }
 
 /* Log out button */
@@ -207,4 +245,60 @@ body.sec-2 #account-menu ul li:last-of-type {
   color: #FFF;
   border-radius: 3px;
   margin-bottom: 2rem;
+}
+
+/* ===================== */
+/* Liked Recipes Section */
+/* ===================== */
+
+#acc-container section:last-of-type > h1 {
+  font-size: 1.75rem;
+  color: #FF7839;
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: -1rem;
+}
+
+#acc-container section:last-of-type article footer ul {
+  display: flex;
+}
+#acc-container section:last-of-type article footer ul li {
+  display: flex;
+  align-self: flex-end;
+  margin-right: 1rem;
+  align-items: center;
+  opacity: .8;
+}
+#acc-container section:last-of-type article footer ul li:last-of-type {
+  margin-left: auto;
+  margin-right: 0;
+  opacity: 1;
+}
+#acc-container section:last-of-type article footer ul li span {
+  margin-right: .3rem;
+  font-size: 1.2rem;
+}
+#acc-container section:last-of-type article footer ul li p {
+  font-size: .85rem;
+}
+
+#acc-container section:last-of-type article footer ul li form button {
+  background-color: rgba(0,0,0,.5);
+  border: solid .1rem #00A6FD;
+  color: #00A6FD;
+  line-height: 2.9rem;
+  font-size: 1.5rem;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 100px;
+  z-index: 10;
+}
+
+#acc-container section:last-of-type article footer ul li form button:hover {
+  background-color: rgba(255,255,255,.3);
+}
+
+#acc-container section:last-of-type article footer ul li form button.liked {
+  border: solid .1rem #00fd36;
+  color: #00fd36;
 }

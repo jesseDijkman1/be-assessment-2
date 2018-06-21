@@ -9,3 +9,7 @@
 .hidden {
   transform: scale(0);
 }
+
+.liked:hover {
+  border-color: #ff3849 !important;
+}

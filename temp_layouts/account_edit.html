@@ -30,72 +30,43 @@
       <header>
         <div>
           <img src="https://source.unsplash.com/random" alt="">
+          <input type="file">
+          <span class="fa fa-pencil"></span>
         </div>
         <h3>Jesse Dijkman</h3>
       </header>
       <section>
         <div>
           <h1>My Info</h1>
-          <a href=""><span class="fa fa-pencil"></span></a>
+          <span class="fa fa-pencil hidden"></span>
         </div>
         <form id="my-info" action="">
           <label for="my-first-name">First name</label>
-          <input id="my-first-name" name="user_firstName" type="text" value="Jesse" disabled>
+          <input id="my-first-name" name="user_firstName" type="text" value="Jesse">
 
           <label for="my-last-name">Last name</label>
-          <input id="my-last-name" name="user_lastName" type="text" value="Dijkman" disabled>
+          <input id="my-last-name" name="user_lastName" type="text" value="Dijkman">
 
           <label for="my-age">Age</label>
-          <input id="my-age" type="text" name="user_age" value="20" maxlength="3" disabled>
+          <input id="my-age" type="text" name="user_age" value="20" maxlength="3">
 
           <label for="my-description">About myself</label>
-          <textarea id="my-description" name="user_description" rows="8" cols="80" disabled>Ik ben jesse ik ben 20 jaar oud en woon ergens</textarea>
+          <textarea id="my-description" name="user_description" rows="8" cols="80">Ik ben jesse ik ben 20 jaar oud en woon ergens</textarea>
 
-          <button type="submit" disabled>Save Changes</button>
+          <button class="pop" type="submit">Save Changes</button>
         </form>
 
-        <a href="/logout"><button class="pop" type="button">Log out</button></a>
+        <!-- <a href="/logout"><button class="pop" type="button">Log out</button></a> -->
       </section>
     </section>
-    <section>
-      <h1>Liked Recipes</h1>
-      <article class="recipe">
-        <a class="detailUrl" href=""></a>
-        <img src="https://source.unsplash.com/random" alt="">
-        <h1>Title</h1>
-        <small class="author">Some guy</small>
-        <footer>
-          <ul>
-            <li>
-              <span class="fa fa-heart"></span>
-              <p class="likes">Some nr</p>
-            </li>
-            <li>
-              <span class="fa fa-dollar"></span>
-              <p class="likes">Medium</p>
-            </li>
-            <li>
-              <span class="fa fa-clock-o"></span>
-              <p class="likes">Medium</p>
-            </li>
-            <li>
-              <form class="like-recipe" action="" method="">
-                <button class="pop liked" type="button" name="like" value="recipe_id">&#9829;</button>
-              </form>
-            </li>
-          </ul>
-        </footer>
-      </article>
-    </section>
-  </div>
 
   <!-- account Menu -->
-  <nav id="account-menu">
+  <!-- <nav id="account-menu">
     <ul>
       <li class="acc-menu-itm">My Account</li>
       <li class="acc-menu-itm">Liked Recipes</li>
     </ul>
-  </nav>
+  </nav> -->
 
 <script src="../static/js/main.js"></script>
 <script src="../static/js/acc.js"></script>
