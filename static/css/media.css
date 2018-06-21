@@ -9,9 +9,8 @@
     margin-left: 0;
     margin-right: 0;
   }
-  #acc-container > section:last-of-type {
+  #acc-container.n-edit > section:last-of-type {
     display: grid;
-
     grid-auto-rows: 3rem;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 4rem;
@@ -35,10 +34,10 @@
   .user-form > a {
     margin-bottom: 0;
   }
-  #acc-container section:first-of-type > section  {
+  /* #acc-container section:first-of-type > section  {
     padding: 0 1.5rem !important;
   }
   #acc-container section:first-of-type > section > a button:last-of-type {
     margin-bottom: 5rem !important;
-  }
+  } */
 }

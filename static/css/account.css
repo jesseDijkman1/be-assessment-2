@@ -42,11 +42,11 @@
 /* Content Sections */
 
 #acc-container {
-  height: calc(100vh);
+  height: 100%;
   display: grid;
   overflow-x: hidden;
   grid-template-columns: 100% 100%;
-  padding-top: 3rem;
+  /* padding-top: 3rem; */
 }
 
 #acc-container section {
