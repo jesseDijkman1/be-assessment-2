@@ -43,6 +43,11 @@ h1 {
   background-color: #FF7839;
   padding: .5rem;
   display: flex;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  top: 0;
+  left: 0;
   align-items: center;
   justify-content: center;
 }

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../static/css/main.css">
+  <link rel="stylesheet" href="../static/css/transitions.css">
+  <link rel="stylesheet" href="../static/css/media.css">
+  <link rel="stylesheet" href="../static/css/form.css">
+  <link rel="stylesheet" href="../static/css/account.css">
+  <title>Document</title>
+</head>
+<body class="sec-1">
+  <!-- Main Menu -->
+  <nav id="main-menu">
+    <ul>
+      <a href="/"><li class="menu-item home">Home</li></a>
+      <a href="#"><li class="menu-item contact">Contact</li></a>
+      <a href="#"><li class="menu-item account">Account</li></a>
+    </ul>
+  </nav>
+
+  <!-- Content Container for smooth animation -->
+  <div id="acc-container">
+    <section>
+      <header>
+        <div>
+          <img src="https://source.unsplash.com/random" alt="">
+        </div>
+        <h3>Jesse Dijkman</h3>
+      </header>
+      <section>
+        <div>
+          <h1>My Info</h1>
+          <a href=""><span class="fa fa-pencil"></span></a>
+        </div>
+        <form id="my-info" action="">
+          <label for="my-first-name">First name</label>
+          <input id="my-first-name" name="user_firstName" type="text" value="Jesse" disabled>
+
+          <label for="my-last-name">Last name</label>
+          <input id="my-last-name" name="user_lastName" type="text" value="Dijkman" disabled>
+
+          <label for="my-age">Age</label>
+          <input id="my-age" type="text" name="user_age" value="20" maxlength="3" disabled>
+
+          <label for="my-description">About myself</label>
+          <textarea id="my-description" name="user_description" rows="8" cols="80" disabled>Ik ben jesse ik ben 20 jaar oud en woon ergens</textarea>
+
+          <button type="submit" disabled>Save Changes</button>
+        </form>
+
+        <a href="/logout"><button class="pop" type="button">Log out</button></a>
+      </section>
+    </section>
+    <section>
+
+    </section>
+  </div>
+
+  <!-- account Menu -->
+  <nav id="account-menu">
+    <ul>
+      <li class="acc-menu-itm">My Account</li>
+      <li class="acc-menu-itm">Liked Recipes</li>
+    </ul>
+  </nav>
+
+<script src="../static/js/main.js"></script>
+<script src="../static/js/acc.js"></script>
+</body>
+</html>

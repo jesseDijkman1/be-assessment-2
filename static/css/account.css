@@ -1,0 +1,210 @@
+/* Account Menu */
+
+#account-menu {
+  background-color: #00A6FD;
+  position: fixed;
+  height: 3rem;
+  width: 100%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  bottom: 0;
+}
+
+#account-menu ul {
+  /* width: 80%;
+  max-width: 30rem; */
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#account-menu ul li {
+  font-size: 1.25rem;
+  color: rgba(255,255,255,.7);
+  width: 50%;
+  text-align: center;
+  /* display: block; */
+  /* background-color: red; */
+  z-index: 1;
+  line-height: 3rem;
+}
+
+#account-menu ul li:first-of-type {
+  border-right: solid .1rem rgba(255,255,255,.6);
+}
+
+/* Content Sections */
+
+#acc-container {
+  height: calc(100vh);
+  display: grid;
+  overflow-x: hidden;
+  grid-template-columns: 100% 100%;
+  padding-top: 3rem;
+}
+
+#acc-container section {
+  transition: transform .15s ease-in-out;
+}
+
+#acc-container section:first-of-type {
+  /* background-color:; */
+}
+
+#acc-container section:last-of-type {
+  background-color: #ccc;
+}
+
+body.sec-1 #acc-container section:first-of-type,
+body.sec-1 #acc-container section:last-of-type {
+  transform: translateX(0);
+}
+
+body.sec-2 #acc-container section:first-of-type,
+body.sec-2 #acc-container section:last-of-type {
+  transform: translateX(-100vw);
+}
+
+body.sec-1 #account-menu ul li:first-of-type,
+body.sec-2 #account-menu ul li:last-of-type {
+  color: #FFF;
+}
+
+/* My Account Section */
+#acc-container section:first-of-type header {
+  padding: 1rem 3rem;
+  /* margin: 0 3rem; */
+  border-bottom: solid .1rem rgba(0,0,0,.05);
+  background-color: #f2f2f2;
+}
+
+#acc-container section:first-of-type header > div {
+  width: 70vw;
+  height: 70vw;
+  max-height: 20rem;
+  max-width: 20rem;
+  border-radius: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  background-color: #ccc;
+}
+
+#acc-container section:first-of-type header > div img {
+  width: auto;
+  height: 100%;
+}
+
+#acc-container section:first-of-type header h3 {
+  text-align: center;
+  margin-top: .5rem;
+}
+
+#acc-container section:first-of-type > section {
+  background-color: #f2f2f2;
+  margin-top: .5rem;
+  border-bottom: solid .1rem rgba(0,0,0,.05);
+  border-top: solid .1rem rgba(0,0,0,.05);
+  padding: 0 .5rem;
+  padding-bottom: 3rem;
+}
+
+#acc-container section:first-of-type > section > div:first-of-type {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+#acc-container section:first-of-type > section > div:first-of-type h1 {
+  color: #FF7839;
+  flex-grow: 1;
+  text-align: center;
+  font-size: 3rem;
+}
+
+#acc-container section:first-of-type > section > div:first-of-type span {
+  color: rgba(0,0,0,.7);
+  font-size: 2rem;
+  position: absolute;
+  bottom: .5rem;
+  right: .5rem;
+}
+
+#my-info {
+  display: grid;
+  max-width: 50rem;
+  grid-template-columns: 1fr 2fr;
+  grid-column-gap: .5rem;
+  grid-row-gap: 1rem;
+  font-size: 1.25rem;
+  margin: 0 auto;
+  margin-bottom: 4rem;
+
+}
+
+#my-info label {
+  /* background-color: red; */
+  line-height: 3rem;
+  text-align: right;
+  padding-right: .5rem;
+  padding-left: .5rem;
+  font-family: Arial, 'Avenir';
+  font-weight: bold;
+  color: rgba(0,0,0,.85);
+  background-color: rgba(150,150,150,.1);
+  border-radius: 3px;
+
+}
+
+#my-info input {
+  /* background-color: blue; */
+  padding-right: .5rem;
+  padding-left: .5rem;
+  border-radius: 3px;
+  background-color: rgba(255,255,255,1)
+}
+
+#my-info input:disabled {
+  background-color: rgba(255,255,255,.5);
+}
+
+#my-info label:last-of-type {
+  grid-column: 1 / 3;
+  text-align: left;
+  margin-top: 1rem;
+}
+
+#my-info textarea {
+  font-size: 1.25rem;
+  padding: .5rem;
+  grid-column: 1 / 3;
+  border-radius: 3px;
+  resize: none;
+  /* margin-top: 1rem; */
+}
+
+#my-info textarea:disabled {
+  background-color: rgba(255,255,255,.5);
+}
+
+#my-info button:disabled {
+  display: none;
+}
+
+/* Log out button */
+
+#acc-container section:first-of-type > section > a button:last-of-type {
+  display: block;
+  margin: 0 auto;
+  background-color: #ff3849;
+  padding: .75rem 1rem;
+  width: 100%;
+  max-width: 30rem;
+  color: #FFF;
+  border-radius: 3px;
+  margin-bottom: 2rem;
+}
