@@ -22,7 +22,6 @@
   }
   #acc-container > section:last-of-type article:nth-of-type(odd) {
     justify-self: end;
-    /* width: 100%; */
   }
 }
 
