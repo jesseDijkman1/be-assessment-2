@@ -258,7 +258,9 @@ body.sec-2 #account-menu ul li:last-of-type {
   margin-top: 2rem;
   margin-bottom: -1rem;
 }
-
+#acc-container section:last-of-type article {
+  width: 100%;
+}
 #acc-container section:last-of-type article footer ul {
   display: flex;
 }
