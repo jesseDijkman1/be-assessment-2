@@ -1,0 +1,119 @@
+<% include includes/head.ejs %>
+
+<body class="sec-1">
+  <!-- Main Menu -->
+  <nav id="main-menu">
+    <ul>
+      <a href="/"><li class="menu-item home">Home</li></a>
+      <a href="#"><li class="menu-item contact">Contact</li></a>
+      <a href="#"><li class="menu-item account">Account</li></a>
+    </ul>
+  </nav>
+
+  <!-- Content Container for smooth animation -->
+  <div class="n-edit" id="acc-container">
+    <section>
+      <header>
+        <div>
+          <img src="https://source.unsplash.com/random" alt="">
+        </div>
+        <h3><%= user.first_name %> <%= user.last_name %></h3>
+      </header>
+      <section>
+        <div>
+          <h1>My Info</h1>
+          <a href="/account/edit"><span class="fa fa-pencil"></span></a>
+        </div>
+        <form id="my-info" action="">
+          <label for="my-first-name">First name</label>
+          <input id="my-first-name" name="user_firstName" type="text" value="<%= user.first_name %>" disabled>
+
+          <label for="my-last-name">Last name</label>
+          <input id="my-last-name" name="user_lastName" type="text" value="<%= user.last_name %>" disabled>
+
+          <label for="my-age">Age</label>
+          <input id="my-age" type="text" name="user_age" value="<%= user.age %>" maxlength="3" disabled>
+
+          <label for="my-description">About myself</label>
+          <textarea id="my-description" name="user_description" rows="8" cols="80" disabled><%= user.description %></textarea>
+
+          <button type="submit" disabled>Save Changes</button>
+        </form>
+
+        <a href="/logout"><button class="pop" type="button">Log out</button></a>
+
+      </section>
+
+    </section>
+
+
+    <section>
+
+      <h1>Liked Recipes</h1>
+      <article class="recipe">
+        <a class="detailUrl" href=""></a>
+        <img src="https://source.unsplash.com/random" alt="">
+        <h1>Title</h1>
+        <small class="author">Some guy</small>
+        <footer>
+          <ul>
+            <li>
+              <span class="fa fa-heart"></span>
+              <p class="likes">Some nr</p>
+            </li>
+            <li>
+              <span class="fa fa-dollar"></span>
+              <p class="likes">Medium</p>
+            </li>
+            <li>
+              <span class="fa fa-clock-o"></span>
+              <p class="likes">Medium</p>
+            </li>
+            <li>
+              <form class="like-recipe" action="" method="">
+                <button class="pop liked" type="button" name="like" value="recipe_id">&#9829;</button>
+              </form>
+            </li>
+          </ul>
+        </footer>
+      </article>
+      <article class="recipe">
+        <a class="detailUrl" href=""></a>
+        <img src="https://source.unsplash.com/random" alt="">
+        <h1>Title</h1>
+        <small class="author">Some guy</small>
+        <footer>
+          <ul>
+            <li>
+              <span class="fa fa-heart"></span>
+              <p class="likes">Some nr</p>
+            </li>
+            <li>
+              <span class="fa fa-dollar"></span>
+              <p class="likes">Medium</p>
+            </li>
+            <li>
+              <span class="fa fa-clock-o"></span>
+              <p class="likes">Medium</p>
+            </li>
+            <li>
+              <form class="like-recipe" action="" method="">
+                <button class="pop liked" type="button" name="like" value="recipe_id">&#9829;</button>
+              </form>
+            </li>
+          </ul>
+        </footer>
+      </article>
+
+    </section>
+  </div>
+
+  <!-- account Menu -->
+  <nav id="account-menu">
+    <ul>
+      <li class="acc-menu-itm">My Account</li>
+      <li class="acc-menu-itm">Liked Recipes</li>
+    </ul>
+  </nav>
+
+<% include includes/footer.ejs %>

@@ -6,7 +6,7 @@
   <ul>
     <a href="/"><li class="menu-item home">Home</li></a>
     <a href="#"><li class="menu-item contact">Contact</li></a>
-    <a href="<% if(!req.session.userId) { %> /login <% } else if(req.session.userId) { %> /account/:id <% } %>"><li class="menu-item account">Account</li></a>
+    <a href="<% if(!req.session.userId) { %> /login <% } else if(req.session.userId) { %> /account/<% req.session.userId %><% } %>"><li class="menu-item account">Account</li></a>
   </ul>
 </nav>
 

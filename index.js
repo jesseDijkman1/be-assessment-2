@@ -3,6 +3,7 @@
 
 'use strict';
 const checker = require('./checkinputs.js');
+const capt = require('./capitalizer.js');
 
 const ejs = require('ejs');
 const bodyParser = require('body-parser');
@@ -16,7 +17,6 @@ const session = require('express-session');
 // const LocalStrategy = require('passport-local').Strategy;
 
 require('dotenv').config();
-
 
 // MySQL connection
 var connection = mysql.createConnection({
@@ -49,7 +49,6 @@ app.use(session({
 // Routes
 
 app.get('/', (req, res) => {
-  console.log(req);
   res.render('list.ejs', {req:req});
 });
 
@@ -77,7 +76,6 @@ app.get('/register', (req, res) => {
       user_passwordConf: null
     }
   };
-  console.log(req);
   res.render('register.ejs', Object.assign({}, result, {req: req}));
 });
 
@@ -87,8 +85,43 @@ app.get('/login', (req, res) => {
     msg: null,
     value: null
   };
-  console.log(req);
   res.render('login.ejs', Object.assign({}, error, {req: req}));
+});
+
+app.get('/account', (req, res, next) => {
+  // let id = req.params.id;
+  connection.query(`SELECT * FROM accounts WHERE accounts.userID = ${req.session.userId}`, (err, data) => {
+    if (err) {
+      return console.log(err);
+    } else {
+
+      res.render('account.ejs', Object.assign({}, {user: data[0]}, {req: req}));
+    }
+  });
+});
+
+app.get('/account/edit', (req, res) => {
+  connection.query(`SELECT * FROM accounts WHERE accounts.userID = ${req.session.userId}`, (err, data) => {
+    if (err) {
+      return console.log(err);
+    } else {
+
+      res.render('account_edit.ejs', Object.assign({}, {user: data[0]}, {req: req}));
+    }
+  });
+});
+
+app.get('/logout', (req, res, next) => {
+  if (req.session.userId) {
+    // delete session object
+    req.session.destroy(function(err) {
+      if(err) {
+        return next(err);
+      } else {
+        return res.redirect('/');
+      }
+    });
+  }
 });
 
 // Let User Make An Account
@@ -125,8 +158,8 @@ app.post('/register', (req, res, next) => {
                     "${x}"
                   );
                   INSERT INTO accounts (first_name, last_name, userID) VALUES(
-                    "${req.body.user_firstName}",
-                    "${req.body.user_lastName}",
+                    "${capt(req.body.user_firstName)}",
+                    "${capt(req.body.user_lastName)}",
                     LAST_INSERT_ID()
                   );`, (err, data) => {
                     if (err) {
@@ -179,6 +212,20 @@ app.post('/login', (req, res, next) => {
   }
   });
 });
+
+app.post('/saveAccount', (req, res, next) => {
+
+  connection.query(`UPDATE accounts SET accounts.first_name = ${connection.escape(req.body.user_firstName)}, accounts.last_name = '${req.body.user_lastName}', accounts.age = '${req.body.user_age}', accounts.description = '${req.body.user_description}' WHERE accounts.userID = ${req.session.userId}`, (err, succes) => {
+      if (err) {
+        return console.log(err);
+      } else {
+        console.log(`The changes made to '${req.session.userId}' have been saved`);
+
+        res.redirect('/account');
+      }
+    });
+});
+
 
 app.listen(3000, () => {
   console.log('Listening to port 3000');

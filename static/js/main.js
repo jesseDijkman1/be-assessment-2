@@ -1,10 +1,5 @@
 /* jshint esversion: 6 */
 
-
-// -------------------
-//     List.ejs JS
-// -------------------
-
 const radioButtons = document.querySelectorAll('#sorting input[type="radio"]');
 const likeButtons = document.querySelectorAll('#recipe-list article footer ul li form button');
 const sortButton = document.getElementById('sort-btn');

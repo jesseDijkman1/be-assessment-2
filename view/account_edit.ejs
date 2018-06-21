@@ -1,0 +1,47 @@
+<% include includes/head.ejs %>
+
+<body class="sec-1">
+  <!-- Main Menu -->
+  <nav id="main-menu">
+    <ul>
+      <a href="/"><li class="menu-item home">Home</li></a>
+      <a href="#"><li class="menu-item contact">Contact</li></a>
+      <a href="#"><li class="menu-item account">Account</li></a>
+    </ul>
+  </nav>
+
+  <!-- Content Container for smooth animation -->
+  <div id="acc-container">
+    <section>
+      <header>
+        <div class="editing">
+          <img src="https://source.unsplash.com/random" alt="">
+          <input type="file">
+          <span class="fa fa-pencil"></span>
+        </div>
+        <h3><%= user.first_name %> <%= user.last_name %></h3>
+      </header>
+      <section>
+        <div>
+          <h1>My Info</h1>
+          <span class="fa fa-pencil hidden"></span>
+        </div>
+        <form id="my-info" action="/saveAccount" method="POST">
+          <label for="my-first-name">First name</label>
+          <input id="my-first-name" name="user_firstName" type="text" value="<%= user.first_name %>" disabled>
+
+          <label for="my-last-name">Last name</label>
+          <input id="my-last-name" name="user_lastName" type="text" value="<%= user.last_name %>" disabled>
+
+          <label for="my-age">Age</label>
+          <input id="my-age" type="number" name="user_age" value="<%= user.age %>" min="16" max="100">
+
+          <label for="my-description">About myself</label>
+          <textarea id="my-description" name="user_description" rows="8" cols="80"><%= user.description %></textarea>
+
+          <button class="pop" type="submit">Save Changes</button>
+        </form>
+      </section>
+    </section>
+
+    <% include includes/footer.ejs %>

@@ -1,9 +1,5 @@
 /* jshint esversion: 6 */
 
-// ----------------------
-//     Account.ejs JS
-// ----------------------
-
 const accMenuItms = document.getElementsByClassName('acc-menu-itm');
 const likedRecipes = document.querySelectorAll('#acc-container section:last-of-type article .liked');
 
