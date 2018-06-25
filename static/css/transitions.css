@@ -13,3 +13,22 @@
 .liked:hover {
   border-color: #ff3849 !important;
 }
+
+.removeable {
+  animation-name: show;
+  animation-duration: .5s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes show {
+  0% {
+    transform: translateX(-100vw);
+  }
+  70% {
+    transform: translateX(2rem);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

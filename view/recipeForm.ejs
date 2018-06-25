@@ -1,0 +1,76 @@
+<% include includes/head.ejs %>
+
+<body id="recipe">
+  <nav id="main-menu">
+    <ul>
+      <a href="/"><li class="menu-item home">Home</li></a>
+      <a href="#"><li class="menu-item contact">Contact</li></a>
+      <a href="#"><li class="menu-item account">Account</li></a>
+    </ul>
+  </nav>
+  <h1>Make a Recipe</h1>
+
+  <form action="">
+    <div id="recipe-form">
+    <label for="r-name">Recipe name</label>
+    <input id="r-name" type="text" name="recipe_name">
+
+    <fieldset id="ingredients">
+      <legend>Ingredients</legend>
+
+      <div class="ingredient" id="ingredient-template">
+        <span class="fa fa-close pop remove"></span>
+          <input id="i-name" type="text" placeholder="Name">
+
+          <input id="i-amount" type="number" placeholder="Amount">
+
+          <select name="" id="i-unit">
+            <option value="gram">g</option>
+            <option value="liter">l</option>
+            <option value="pound">lb</option>
+            <option value="pieces">Pieces</option>
+            <option disabled hidden selected>Unit</option>
+          </select>
+
+      </div>
+      </fieldset>
+
+      <button type="button" id="more-ingredients">More Ingredients</button>
+
+
+    <label for="costs">Costs</label>
+    <select name="recipe_costs" id="costs">
+      <option value="low">Low</option>
+      <option value="medium">Medium</option>
+      <option value="high">High</option>
+      <option disabled selected hidden></option>
+    </select>
+
+    <label for="difficulty">Difficulty</label>
+    <select name="recipe_difficulty" id="difficulty">
+      <option value="low">Low</option>
+      <option value="medium">Medium</option>
+      <option value="high">High</option>
+      <option disabled selected hidden></option>
+    </select>
+
+    <fieldset id="steps">
+      <legend>Steps</legend>
+        <div class="step" id="step-template">
+          <span class="fa fa-close pop remove"></span>
+          <label class="step-nr" for="">1</label>
+          <textarea name="name" rows="8" cols="40"></textarea>
+        </div>
+    </fieldset>
+  <button type="button" id="more-steps">More Steps</button>
+
+    <footer>
+      <button>Publish Recipe</button>
+      <button>Cancel</button>
+    </footer>
+    </div>
+
+
+  </form>
+
+<% include includes/footer.ejs %>

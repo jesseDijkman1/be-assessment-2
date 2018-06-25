@@ -36,6 +36,9 @@ h1 {
   font-family: 'Lora', Arial, Avenir;
 }
 
+textarea {
+  resize: none !important;
+}
 /* List.ejs styling */
 
 /* =================== */

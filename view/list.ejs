@@ -5,7 +5,8 @@
   <ul>
     <a href="/"><li class="menu-item home">Home</li></a>
     <a href="#"><li class="menu-item contact">Contact</li></a>
-    <a href="<% if(!req.session.userId) { %> /login <% } else if(req.session.userId) { %> /account <% } %>"><li class="menu-item account">Account</li></a>
+    <a href="/account"><li class="menu-item account">Account</li></a>
+    <!-- <a href="<% if(!req.session.userId) { %> /login <% } else if(req.session.userId) { %> /account <% } %>"><li class="menu-item account">Account</li></a> -->
   </ul>
 </nav>
 
@@ -26,7 +27,7 @@
     </div>
     <% } %>
     <% if(req.session.userId) { %>
-    <a href="/add">
+    <a href="/addRecipe">
       <button class="pop"><span class="fa fa-plus-square-o"></span>Make Recipe</button>
     </a>
     <% } %>

@@ -14,11 +14,17 @@
   <div id="acc-container">
     <section>
       <header>
+        <!-- <img src="/profile_images/<%= img %>" alt=""> -->
+
         <div class="editing">
-          <img src="https://source.unsplash.com/random" alt="">
-          <input type="file">
+          <img src="/profile_images/<%= img %>" alt="">
+          <form id="profile-img" action="/usrImg" method="POST" enctype="multipart/form-data">
+            <input name="profileImg" type="file">
+          </form>
+          <div></div>
           <span class="fa fa-pencil"></span>
         </div>
+        <button class="pop" form="profile-img" type="submit">Use img</button>
         <h3><%= user.first_name %> <%= user.last_name %></h3>
       </header>
       <section>
@@ -34,7 +40,7 @@
           <input id="my-last-name" name="user_lastName" type="text" value="<%= user.last_name %>" disabled>
 
           <label for="my-age">Age</label>
-          <input id="my-age" type="number" name="user_age" value="<%= user.age %>" min="16" max="100">
+          <input id="my-age" type="number" name="user_age" value="<%= user.age %>" min="10" max="100">
 
           <label for="my-description">About myself</label>
           <textarea id="my-description" name="user_description" rows="8" cols="80"><%= user.description %></textarea>

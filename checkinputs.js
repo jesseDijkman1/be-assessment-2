@@ -6,7 +6,7 @@ const emailValidator = require('email-validator');
 const requirementsPassword = new passwordValidator();
 
 requirementsPassword
-  .is().min(5)
+  .is().min(3)
   .is().max(50)
   // .has().uppercase()
   .has().lowercase()

@@ -35,6 +35,13 @@
   .user-form > a {
     margin-bottom: 0;
   }
+  #recipe-form {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  #recipe footer {
+    grid-template-columns: 3fr 1fr !important;
+  }
   #acc-container section:first-of-type > section  {
     padding: 0 1.5rem !important;
   }
