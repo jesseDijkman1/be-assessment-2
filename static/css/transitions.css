@@ -10,9 +10,6 @@
   transform: scale(0);
 }
 
-.liked:hover {
-  border-color: #ff3849 !important;
-}
 
 .removeable {
   animation-name: show;
@@ -30,5 +27,32 @@
   }
   100% {
     transform: translateX(0);
+  }
+}
+
+#error-msg {
+  animation-name: fadeInOut;
+  animation-duration: 5s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeInOut {
+  0% {
+    transform: scale(1.1);
+    top: 0;
+    opacity: 0;
+  }
+  5% {
+    transform: scale(1);
+    top: 4rem;
+    opacity: 1;
+  }
+  90% {
+    top: 4rem;
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }

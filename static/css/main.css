@@ -80,7 +80,7 @@ textarea {
 /* Main Header */
 /* =========== */
 #main-img {
-  background-image: url('/img/main.jpg');
+  background-image: url('/default/main.jpg');
   background-size: cover;
   background-position: bottom;
   padding-bottom: 1.5rem;
@@ -359,8 +359,9 @@ textarea {
   max-width: 38rem;
   margin-left: auto;
   margin-right: auto;
+  border: solid .1rem #eee;
 }
-.recipe:hover {a
+.recipe:hover {
   cursor: pointer;
 }
 .recipe img {
@@ -395,7 +396,7 @@ textarea {
 
 .recipe h1 {
   color: #FFF;
-  font-size: 1.75rem;
+  font-size: 1.4rem;
   font-family: 'Lora', Arial, Avenir;
 
 }
@@ -447,6 +448,14 @@ textarea {
   width: 3rem;
   border-radius: 100px;
   z-index: 10;
+}
+
+#recipe-list article footer ul li form button span {
+  display: block;
+  line-height: 2.9rem;
+  font-size: 1.5rem;
+  width: 100%;
+  text-align: center;
 }
 
 #recipe-list article footer ul li form button:hover {

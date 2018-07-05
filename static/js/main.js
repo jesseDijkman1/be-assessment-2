@@ -4,11 +4,13 @@ const radioButtons = document.querySelectorAll('#sorting input[type="radio"]');
 const likeButtons = document.querySelectorAll('#recipe-list article footer ul li form button');
 const sortButton = document.getElementById('sort-btn');
 const sortingForm = document.getElementById('sorting');
+// const liked = document.getElementsByClassName 
 
-sortButton.addEventListener('click', (ev) => {
-  sortingForm.classList.toggle('hidden');
-});
-
+if (sortButton) {
+  sortButton.addEventListener('click', (ev) => {
+    sortingForm.classList.toggle('hidden');
+  });
+}
 (function() {
   for (let i = 0; i < radioButtons.length; i++) {
     radioButtons[i].addEventListener('click', () => {

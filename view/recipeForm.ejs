@@ -10,29 +10,81 @@
   </nav>
   <h1>Make a Recipe</h1>
 
-  <form action="">
+  <form action="/addRecipe" method="POST">
     <div id="recipe-form">
     <label for="r-name">Recipe name</label>
-    <input id="r-name" type="text" name="recipe_name">
-
+    <input id="r-name" type="text" name="recipe_name" value="<%= data.r_name %>">
+    <label for="r-description">Description</label>
+    <textarea name="recipe_description" id="r-description" rows="8" cols="40" maxlength="300"><%= data.r_desc %></textarea>
     <fieldset id="ingredients">
       <legend>Ingredients</legend>
-
       <div class="ingredient" id="ingredient-template">
         <span class="fa fa-close pop remove"></span>
-          <input id="i-name" type="text" placeholder="Name">
+          <input id="i-name" type="text" placeholder="Name" name="ingredient_name"  pattern="[A-Z a-z]*" value="<%= data.i_name[0] %>" required>
 
-          <input id="i-amount" type="number" placeholder="Amount">
-
-          <select name="" id="i-unit">
-            <option value="gram">g</option>
-            <option value="liter">l</option>
-            <option value="pound">lb</option>
-            <option value="pieces">Pieces</option>
+          <input id="i-amount" type="number" placeholder="Amount" name="ingredient_amount" value="<%= data.i_amt[0] %>">
+          <select name="ingredient_unit" id="ingredient_unit">
+            <% if (data.i_unit[0] == 'gram') { %>
+              <option value="gram" selected>g</option>
+            <% } else { %>
+              <option value="gram">g</option>
+            <% } %>
+            <% if (data.i_unit[0] == 'liter') { %>
+              <option value="liter" selected>l</option>
+            <% } else { %>
+              <option value="liter">l</option>
+            <% } %>
+            <% if (data.i_unit[0] == 'pound') { %>
+              <option value="pound" selected>lb</option>
+            <% } else { %>
+              <option value="pound">lb</option>
+            <% } %>
+            <% if (data.i_unit[0] == 'pieces') { %>
+              <option value="pieces" selected>Pieces</option>
+            <% } else { %>
+              <option value="pieces">Pieces</option>
+            <% } %>
+            <% if (!data.i_unit[0] || data.i_unit[0] == undefined) { %>
             <option disabled hidden selected>Unit</option>
+            <% } %>
           </select>
 
       </div>
+      <% for (let i = 1; i < data.i_name.length; i++) { %>
+        <div class="ingredient removeable" id="ingredient-template">
+          <span class="fa fa-close pop remove"></span>
+            <input id="i-name" type="text" placeholder="Name" name="ingredient_name"  pattern="[A-Z a-z]*" value="<%= data.i_name[i] %>">
+
+            <input id="i-amount" type="number" placeholder="Amount" name="ingredient_amount" value="<%= data.i_amt[i] %>">
+
+            <select name="ingredient_unit" id="ingredient_unit">
+              <% if (data.i_unit[i] == 'gram') { %>
+                <option value="gram" selected>g</option>
+              <% } else { %>
+                <option value="gram">g</option>
+              <% } %>
+              <% if (data.i_unit[i] == 'liter') { %>
+                <option value="liter" selected>l</option>
+              <% } else { %>
+                <option value="liter">l</option>
+              <% } %>
+              <% if (data.i_unit[i] == 'pound') { %>
+                <option value="pound" selected>lb</option>
+              <% } else { %>
+                <option value="pound">lb</option>
+              <% } %>
+              <% if (data.i_unit[i] == 'pieces') { %>
+                <option value="pieces" selected>Pieces</option>
+              <% } else { %>
+                <option value="pieces">Pieces</option>
+              <% } %>
+              <% if (!data.i_unit[i]) { %>
+              <option disabled hidden selected>Unit</option>
+              <% } %>
+            </select>
+
+        </div>
+        <% } %>
       </fieldset>
 
       <button type="button" id="more-ingredients">More Ingredients</button>
@@ -40,37 +92,76 @@
 
     <label for="costs">Costs</label>
     <select name="recipe_costs" id="costs">
-      <option value="low">Low</option>
-      <option value="medium">Medium</option>
-      <option value="high">High</option>
-      <option disabled selected hidden></option>
+      <% if (data.r_costs == 'low') { %>
+        <option value="low" selected>Low</option>
+      <% } else { %>
+        <option value="low">Low</option>
+      <% } %>
+      <% if (data.r_costs == 'medium') { %>
+        <option value="medium" selected>Medium</option>
+      <% } else { %>
+        <option value="medium">Medium</option>
+      <% } %>
+      <% if (data.r_costs == 'high') { %>
+        <option value="high" selected>High</option>
+      <% } else { %>
+        <option value="high">High</option>
+      <% } %>
+      <% if (!data.r_costs) { %>
+        <option disabled selected hidden></option>
+      <% } %>
     </select>
 
     <label for="difficulty">Difficulty</label>
     <select name="recipe_difficulty" id="difficulty">
-      <option value="low">Low</option>
-      <option value="medium">Medium</option>
-      <option value="high">High</option>
-      <option disabled selected hidden></option>
+      <% if (data.r_diff == 'low') { %>
+        <option value="low" selected>Low</option>
+      <% } else { %>
+        <option value="low">Low</option>
+      <% } %>
+      <% if (data.r_diff == 'medium') { %>
+        <option value="medium" selected>Medium</option>
+      <% } else { %>
+        <option value="medium">Medium</option>
+      <% } %>
+      <% if (data.r_diff == 'high') { %>
+        <option value="high" selected>High</option>
+      <% } else { %>
+        <option value="high">High</option>
+      <% } %>
+      <% if (!data.r_diff) { %>
+        <option disabled selected hidden></option>
+      <% } %>
     </select>
 
     <fieldset id="steps">
       <legend>Steps</legend>
+
         <div class="step" id="step-template">
           <span class="fa fa-close pop remove"></span>
           <label class="step-nr" for="">1</label>
-          <textarea name="name" rows="8" cols="40"></textarea>
+          <textarea name="recipe_step" rows="8" cols="40" maxlength="300"><%= data.r_step[0] %></textarea>
         </div>
+        <% for (let i = 1; i < data.r_step.length; i++) { %>
+          <div class="step removeable" id="step-template">
+            <span class="fa fa-close pop remove"></span>
+            <label class="step-nr" for=""><%= i + 1 %></label>
+            <textarea name="recipe_step" rows="8" cols="40" maxlength="300"><%= data.r_step[i] %></textarea>
+          </div>
+          <% } %>
     </fieldset>
   <button type="button" id="more-steps">More Steps</button>
 
     <footer>
-      <button>Publish Recipe</button>
-      <button>Cancel</button>
+      <button type="submit">Publish Recipe</button>
+      <a href="/"><button>Cancel</button></a>
     </footer>
     </div>
 
 
   </form>
+  <% if (error) { %>
+    <p id="error-msg"><%= error %></p>
+  <% } %>
 
 <% include includes/footer.ejs %>

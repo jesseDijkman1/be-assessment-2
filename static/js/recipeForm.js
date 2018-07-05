@@ -16,7 +16,11 @@ function addIngredient() {
 
   let newField = ingredient.cloneNode(true);
   newField.classList.add('removeable');
+
   let removeBtn = newField.children[0];
+
+  newField.children[1].value = null;
+  newField.children[2].value = null;
 
   removeBtn.addEventListener('click', () => {
     let parent = removeBtn.parentNode;
@@ -41,36 +45,83 @@ function addIngredient() {
 const moreSteps = document.getElementById('more-steps');
 const stepsCont = document.getElementById('steps');
 const step = document.getElementById('step-template');
+const steps = document.getElementsByClassName('step');
 
-
-let amtSteps = 1;
+let amtSteps = steps.length;
 const maxSteps = 5;
-
+console.log(amtSteps)
 if (moreSteps) {
   moreSteps.addEventListener('click', addStep);
 }
 
 function addStep() {
   amtSteps++;
+
   let newField = step.cloneNode(true);
+
   newField.classList.add('removeable');
+
   let removeBtn = newField.children[0];
-  let stepNr = newField.children[1];
-  stepNr.textContent = amtSteps;
+
+  newField.children[1].textContent = amtSteps;
+
+  newField.children[2].value = null;
+
   removeBtn.addEventListener('click', () => {
+
     let parent = removeBtn.parentNode;
+
     parent.parentNode.removeChild(parent);
-    if (amtSteps == maxSteps) {
+
+    amtSteps--;
+
+    if (amtSteps < maxSteps) {
+
       moreSteps.addEventListener('click', addStep);
+
       moreSteps.style.opacity = '1';
     }
-    amtSteps--;
+
   });
 
   stepsCont.appendChild(newField);
 
   if (amtSteps == maxSteps) {
+
     moreSteps.removeEventListener('click', addStep);
+
     moreSteps.style.opacity = '.3';
   }
+
 }
+
+if (amtSteps == maxSteps) {
+
+  moreSteps.removeEventListener('click', addStep);
+
+  moreSteps.style.opacity = '.3';
+}
+
+var test = document.querySelectorAll('.removeable > span');
+
+function test1() {
+
+  for (let i = 0; i < test.length; i++) {
+
+    test[i].addEventListener('click', () => {
+
+      test[i].parentNode.parentNode.removeChild(test[i].parentNode);
+
+      amtSteps--;
+
+      if (amtSteps < maxSteps) {
+
+        moreSteps.addEventListener('click', addStep);
+
+        moreSteps.style.opacity = '1';
+      }
+    })
+  }
+}
+
+test1();

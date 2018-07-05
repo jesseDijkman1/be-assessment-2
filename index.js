@@ -5,6 +5,7 @@
 const checker = require('./checkinputs.js');
 const capt = require('./capitalizer.js');
 const imgManager = require('./imgManager.js');
+const recipeCheck = require('./checkRecipe.js');
 
 const path = require('path');
 const ejs = require('ejs');
@@ -44,7 +45,9 @@ const storage = multer.diskStorage({
 // Multer Upload
 const upload = multer({
   storage: storage,
-  limits: {fileSize: 8000000},
+  limits: {
+    fileSize: 8000000
+  },
   fileFilter: (req, file, cb) => {
     imgManager.isValid(file, cb);
   }
@@ -58,7 +61,7 @@ app.set('view engine', 'ejs');
 app.set('views', 'view');
 // app.use(passport.initialize());
 app.use(express.static('static'));
-app.use('/img', express.static('./images'));
+app.use('/default', express.static('./images'));
 app.use(express.static('./public'));
 // app.use('profile', express.static('./public/profile_images'));
 app.use(bodyParser.urlencoded({
@@ -74,18 +77,36 @@ app.use(session({
 // Routes
 
 app.get('/', (req, res) => {
-  res.render('list.ejs', {req:req});
+  connection.query('SELECT recipes.name, recipes.costs, recipes.difficulty, recipes.authorID, CONCAT(accounts.first_name, " ", accounts.last_name) AS author FROM recipes JOIN accounts ON accounts.userID = recipes.authorID;', (error, data) => {
+    res.render('list.ejs', {
+      req: req,
+      recipes: data
+    });
+  });
 });
 
 app.get('/addRecipe', (req, res) => {
   // console.log('hello');
+  let result = {
+    error: null,
+    data: {
+      r_name: null,
+      r_desc: null,
+      r_costs: null,
+      r_diff: null,
+      r_step: [null],
+      i_name: [null],
+      i_amt: [null],
+      i_unit: [null]
+    }
+  }
   isLoggedIn(req, (error) => {
     if (error) {
       return res.redirect('/login');
     } else {
       // console.log('no error')
     }
-    res.render('recipeForm.ejs');
+    res.render('recipeForm.ejs', result);
   });
 });
 
@@ -113,7 +134,9 @@ app.get('/register', (req, res) => {
       user_passwordConf: null
     }
   };
-  res.render('register.ejs', Object.assign({}, result, {req: req}));
+  res.render('register.ejs', Object.assign({}, result, {
+    req: req
+  }));
 });
 
 app.get('/login', (req, res) => {
@@ -122,7 +145,9 @@ app.get('/login', (req, res) => {
     msg: null,
     value: null
   };
-  res.render('login.ejs', Object.assign({}, error, {req: req}));
+  res.render('login.ejs', Object.assign({}, error, {
+    req: req
+  }));
 });
 
 app.get('/account', (req, res, next) => {
@@ -139,7 +164,13 @@ app.get('/account', (req, res, next) => {
 
       imgManager.tryFind('./public/profile_images', req.session.userId, (file) => {
 
-          res.render('account.ejs', Object.assign({}, {user: data[0]}, {req: req}, {img: file}));
+        res.render('account.ejs', Object.assign({}, {
+          user: data[0]
+        }, {
+          req: req
+        }, {
+          img: file
+        }));
       });
 
     }
@@ -160,7 +191,13 @@ app.get('/account/edit', (req, res, uploadStatus) => {
     } else {
 
       imgManager.tryFind('./public/profile_images', req.session.userId, (file) => {
-          res.render('account_edit.ejs', Object.assign({}, {user: data[0]}, {req: req}, {img: file}, uploadStatus));
+        res.render('account_edit.ejs', Object.assign({}, {
+          user: data[0]
+        }, {
+          req: req
+        }, {
+          img: file
+        }, uploadStatus));
       });
     }
   });
@@ -169,7 +206,7 @@ app.get('/account/edit', (req, res, uploadStatus) => {
 app.get('/logout', (req, res, next) => {
   if (req.session.userId) {
     req.session.destroy(function(err) {
-      if(err) {
+      if (err) {
         return next(err);
       } else {
         return res.redirect('/');
@@ -185,7 +222,9 @@ app.post('/register', (req, res, next) => {
 
   if (Object.keys(result.error).length > 0) {
 
-    return res.render('register.ejs', Object.assign({}, result, {req: req}));
+    return res.render('register.ejs', Object.assign({}, result, {
+      req: req
+    }));
 
   } else {
     connection.query(`SELECT id FROM users WHERE users.email = ${connection.escape(req.body.user_email)}`, (err, emails) => {
@@ -195,19 +234,21 @@ app.post('/register', (req, res, next) => {
         result.data.user_email = null;
         result.msg.user_email = 'Already in use';
 
-        return res.render('register.ejs', Object.assign({}, result, {req: req}));
+        return res.render('register.ejs', Object.assign({}, result, {
+          req: req
+        }));
       } else {
 
         let x = req.body.user_password;
 
         bcrypt.genSalt(10, function(err, salt) {
-            bcrypt.hash(x, salt, function(err, hash) {
-                if (err) {
-                  return next(err);
-                } else {
-                  x = hash;
+          bcrypt.hash(x, salt, function(err, hash) {
+            if (err) {
+              return next(err);
+            } else {
+              x = hash;
 
-                  connection.query(`INSERT INTO users (email, password) VALUES(
+              connection.query(`INSERT INTO users (email, password) VALUES(
                     ${connection.escape(req.body.user_email)},
                     "${x}"
                   );
@@ -216,24 +257,24 @@ app.post('/register', (req, res, next) => {
                     ${connection.escape(capt(req.body.user_lastName))},
                     LAST_INSERT_ID()
                   );`, (err, data) => {
+                if (err) {
+                  next(err);
+                } else {
+                  console.log(req.body.user_email)
+                  connection.query(`SELECT users.id FROM users WHERE users.email = ${connection.escape(req.body.user_email)}`, (err, user) => {
                     if (err) {
                       next(err);
                     } else {
-                      console.log(req.body.user_email)
-                      connection.query(`SELECT users.id FROM users WHERE users.email = ${connection.escape(req.body.user_email)}`, (err, user) => {
-                        if (err) {
-                          next(err);
-                        } else {
-                          // console.log(id)
-                          req.session.userId = user[0].id;
-                          res.redirect('/');
-                        }
-                      });
-
+                      // console.log(id)
+                      req.session.userId = user[0].id;
+                      res.redirect('/');
                     }
                   });
+
                 }
-            });
+              });
+            }
+          });
         });
       }
     });
@@ -249,7 +290,9 @@ app.post('/login', (req, res, next) => {
   };
 
   if (emailValidator.validate(req.body.user_email) == false) {
-    return res.render('login.ejs', Object.assign({}, error, {req: req}));
+    return res.render('login.ejs', Object.assign({}, error, {
+      req: req
+    }));
   }
 
   connection.query(`SELECT * FROM users WHERE users.email = ${connection.escape(req.body.user_email)}`, (err, user) => {
@@ -258,35 +301,38 @@ app.post('/login', (req, res, next) => {
     }
     if (!user[0]) {
       error.msg = `User doesn't exist`;
-      return res.render('login.ejs', Object.assign({}, error, {req: req}));
+      return res.render('login.ejs', Object.assign({}, error, {
+        req: req
+      }));
+    } else {
+      bcrypt.compare(req.body.user_password, user[0].password, function(err, pass) {
+        if (err) {
+          return next(err);
+        } else if (pass == false) {
+          error.msg = 'Wrong password';
+          return res.render('login.ejs', Object.assign({}, error, {
+            req: req
+          }));
+        } else {
+          // Email and password are correct
+          req.session.userId = user[0].id;
+          res.redirect('/');
+        }
+      });
     }
-    else {
-    bcrypt.compare(req.body.user_password, user[0].password, function(err, pass) {
-      if (err) {
-        return next(err);
-      } else if (pass == false) {
-        error.msg = 'Wrong password';
-        return res.render('login.ejs', Object.assign({}, error, {req: req}));
-      } else {
-        // Email and password are correct
-        req.session.userId = user[0].id;
-        res.redirect('/');
-      }
-    });
-  }
   });
 });
 
 app.post('/saveAccount', (req, res, next) => {
   connection.query(`UPDATE accounts SET accounts.age = ${connection.escape(req.body.user_age)}, accounts.description = ${connection.escape(req.body.user_description)} WHERE accounts.userID = ${connection.escape(req.session.userId)}`, (err, succes) => {
-      if (err) {
-        return console.log(err);
-      } else {
-        console.log(`The changes made to '${req.session.userId}' have been saved`);
+    if (err) {
+      return console.log(err);
+    } else {
+      console.log(`The changes made to '${req.session.userId}' have been saved`);
 
-        res.redirect('/account');
-      }
-    });
+      res.redirect('/account');
+    }
+  });
 });
 
 app.post('/usrImg', (req, res, next) => {
@@ -303,15 +349,77 @@ app.post('/usrImg', (req, res, next) => {
   });
 });
 
+app.post('/addRecipe', (req, res) => {
+
+  recipeCheck(req.body, (error, data) => {
+    if (error) {
+      return res.render('recipeForm.ejs', error);
+    } else {
+      // IS OK
+      console.log('New data', data);
+      connection.query(`INSERT INTO recipes (name, description, authorID, costs, difficulty) VALUES (
+        ${connection.escape(data.r_name)},
+        ${connection.escape(data.r_desc)},
+        ${req.session.userId},
+        ${connection.escape(data.r_costs)},
+        ${connection.escape(data.r_diff)}
+      )`, checkIngredients);
+    }
+
+    function checkIngredients(err_1, recipe) {
+      console.log('Something',recipe)
+      for (let i = 0; i < data.i_name.length; i++) {
+        connection.query(`SELECT * FROM ingredient WHERE ingredient.name = ${connection.escape(data.i_name[i])}`, (err_2, exists) => {
+          if (!exists[0]) {
+              connection.query(`INSERT INTO ingredient (name) VALUES (
+                ${connection.escape(data.i_name[i])}
+              )`, (err_3, ingredient) => {
+                console.log('Ingredient added',ingredient);
+                // console.log(recipe.insertId, ingredient.insertId);
+                connection.query(`INSERT INTO ingredients (recipeID, ingredientID, amount, unit) VALUES (
+                  ${recipe.insertId},
+                  ${ingredient.insertId},
+                  ${connection.escape(data.i_amt[i])},
+                  ${connection.escape(data.i_unit[i])}
+                )`, (err_4, succes) => {
+                  console.log('Test',succes);
+                })
+              });
+          } else {
+            console.log('Found', exists);
+            connection.query(`INSERT INTO ingredients (recipeID, ingredientID, amount, unit) VALUES (
+              ${recipe.insertId},
+              ${exists[0].id},
+              ${connection.escape(data.i_amt[i])},
+              ${connection.escape(data.i_unit[i])}
+            )`, (err_5, succes) => {
+              console.log('Test',succes);
+            })
+          }
+        });
+      }
+    }
+  });
+  res.redirect('/');
+});
+
+// Like a Recipes
+app.post('/likeRecipe/:authorID', (req, res) => {
+  console.log(req.params)
+  res.redirect('/');
+});
+
+
+
 
 // Check if the user is logged in
 function isLoggedIn(req, error) {
   console.log('User id:', !req.session.userId);
-    if (!req.session.userId) {
-      return error(true);
-    } else {
-      return error(false);
-    }
+  if (!req.session.userId) {
+    return error(true);
+  } else {
+    return error(false);
+  }
 }
 
 
